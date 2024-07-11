@@ -7,6 +7,7 @@ public class JumpState : PlayerBaseState
     public override void OnEnter()
     {
         //animación saltar
+        Debug.Log("JumpState.OnEnter");
     }
 
     public override void FixedUpdate()

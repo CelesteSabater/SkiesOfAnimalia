@@ -16,7 +16,7 @@ public class GroundMovementState : PlayerBaseState
         entity.movement.Jump(PlayerInputHandler.Instance.JumpTriggered, entity.GetCoyoteTime(), entity.GetJumpBuffer());
         entity.LookAt(PlayerInputHandler.Instance.MoveInput);
 
-        entity.physics.Float();
-        entity.physics.UpdateUprigthForce();
+        if (!PlayerInputHandler.Instance.JumpTriggered) entity.physics.Float();
+        //entity.physics.UpdateUprigthForce();
     }
 }

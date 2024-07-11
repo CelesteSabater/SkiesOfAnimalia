@@ -48,10 +48,12 @@ public class CharacterMovement : MonoBehaviour
         Vector3 right = Camera.main.transform.right;
 
         Vector3 moveGoal = (forward * dir.y) + (right * dir.x);
+        moveGoal.Normalize();
+        moveGoal.y = 0;
 
-        Vector3 targetVel = jumping == true ? moveGoal * _maxSpeedGround : moveGoal * _maxSpeedGround * _airMultiplier;
+        Vector3 targetVel = jumping == true ? moveGoal * _maxSpeedGround * _airMultiplier : moveGoal * _maxSpeedGround;
 
-        Vector3 velocityChange = targetVel - new Vector3(_rb.velocity.x, 0, _rb.velocity.z);
+        Vector3 velocityChange = targetVel - _rb.velocity;
         Vector3.ClampMagnitude(velocityChange, _maxAccelForceGround);
         _rb.AddForce(velocityChange, ForceMode.VelocityChange);
     }
@@ -73,8 +75,9 @@ public class CharacterMovement : MonoBehaviour
     void Jump()
     {
         _readyToJump = false;
-        _rb.velocity = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
-        _rb.AddForce(transform.up * _jumpUpForce, ForceMode.Impulse);
+        _rb.velocity = new Vector3(_rb.velocity.x, _jumpUpForce, _rb.velocity.z);
+        Debug.Log(_rb.velocity);
+
         Invoke(nameof(ResetJump), _jumpCooldoown);
     }
 

@@ -15,10 +15,10 @@ MonoBehaviour:
   selectedTabIndex: 1
   historyItemsMax: 20
   history:
-  - context: 1
+  - context: 0
     title: 
-    unityObject: {fileID: 102900000, guid: 6ad7388d90baedd4db675a4a3cfec45c, type: 3}
-    objectGuid: GlobalObjectId_V1-1-6ad7388d90baedd4db675a4a3cfec45c-102900000-0
+    unityObject: {fileID: 0}
+    objectGuid: GlobalObjectId_V1-2-ff53b31150c13b147a79ea35ff2eb897-2103366024-0
   favorites:
   - context: 1
     title: 

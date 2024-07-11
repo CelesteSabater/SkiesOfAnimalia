@@ -16,7 +16,7 @@ public class IdleState : PlayerBaseState
         entity.movement.Jump(PlayerInputHandler.Instance.JumpTriggered, entity.GetCoyoteTime(), entity.GetJumpBuffer());
         entity.LookAt(Vector2.zero);
 
-        entity.physics.Float();
+        if (!PlayerInputHandler.Instance.JumpTriggered) entity.physics.Float();
         entity.physics.UpdateUprigthForce();
     }
 }

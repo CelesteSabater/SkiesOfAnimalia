@@ -6,6 +6,7 @@ public class CharacterPhysics : MonoBehaviour
 {
     [SerializeField] private float _rayLenght = 5f, _rideHeight = 0.5f, _groundedHeight = 1f;
     [SerializeField] private float _gravity = 5f;
+    [SerializeField] private float _terminalVelocity = 20f;
     [SerializeField] private float _jumpEndEarlyGravityModifier = 2f;
 
     private Transform _pos;
@@ -30,16 +31,16 @@ public class CharacterPhysics : MonoBehaviour
     public void Fall(bool jump)
     {
         float fallSpeed;
-        if (jump != true && _rb.velocity.y > 0)
+        if (jump != true && _rb.velocity.y > 0) fallSpeed = _gravity;
+        else 
         {
-            if (_controller != null) _controller.SetCoyoteTimeZero();
             fallSpeed = _gravity * _jumpEndEarlyGravityModifier;
+            if (_controller != null) _controller.SetCoyoteTimeZero();
         }
-        else fallSpeed = _gravity;
-        fallSpeed *= Time.deltaTime;
-        fallSpeed = _rb.velocity.y - fallSpeed;
 
-        _rb.velocity = _rb.velocity = new Vector3(_rb.velocity.x, fallSpeed, _rb.velocity.z);
+        Vector3 targetVel = -transform.up * fallSpeed;
+        Vector3 velocityChange = targetVel - _rb.velocity;
+        _rb.AddForce(velocityChange, ForceMode.VelocityChange);
     }
 
     public void Float()
